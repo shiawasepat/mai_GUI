@@ -52,6 +52,14 @@ public class App extends JFrame {
         add(mainPanel);
     }
     
+    public class NavButton extends MaiButton {
+        public NavButton(String text, Color bgColor) {
+            super(text);
+            setBackground(bgColor);
+            setPreferredSize(new Dimension(120, 35));
+        }
+    }   
+
     private void initializeSongData() {
         // Initialize all difficulty lists including Re:MASTER
         String[] difficulties = {"Re:MASTER", "15.0", "14.9", "14.8", "14.7", "14.6", 
@@ -95,18 +103,6 @@ public class App extends JFrame {
         navBar.add(buttonPanel, BorderLayout.EAST);
         
         return navBar;
-    }
-
-    private class NavButton extends JButton {
-        public NavButton(String text, Color bgColor) {
-            super(text);
-            setBackground(bgColor);
-            setForeground(Color.WHITE);
-            setFocusPainted(false);
-            setBorderPainted(false);
-            setFont(new Font("Segoe UI", Font.BOLD, 12));
-            setPreferredSize(new Dimension(120, 35));
-        }
     }
 
     private void addSong(String title, String difficulty, String imageFile) {
@@ -234,6 +230,12 @@ public class App extends JFrame {
                 case "14.0": return new Color(255, 175, 100);
                 default: return new Color(220, 220, 255);
             }
+        }
+    }
+
+    public class StandardDifficultyButton extends DifficultyButton {
+        public StandardDifficultyButton(String difficulty) {
+            super(difficulty);
         }
     }
 
