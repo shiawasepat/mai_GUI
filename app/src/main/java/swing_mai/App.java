@@ -128,7 +128,7 @@ public class App extends JFrame {
         masterBtn.addActionListener(e -> showAllSongs());
         difficultyButtons.put("MASTER", masterBtn); // Fix to support "MASTER" lookup
         sidebar.add(masterBtn);
-
+ 
         // Other difficulty buttons
         List<String> standardDifficulties = Arrays.asList(
                 "15.0", "14.9", "14.8", "14.7", "14.6",
@@ -240,6 +240,8 @@ public class App extends JFrame {
         }
     }
 
+
+    
     public class StandardDifficultyButton extends DifficultyButton {
         public StandardDifficultyButton(String difficulty) {
             super(difficulty);
