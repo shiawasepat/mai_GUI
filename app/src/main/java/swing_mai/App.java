@@ -44,6 +44,7 @@ public class App extends JFrame {
         contentPanel.setBackground(new Color(40, 45, 60));
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Faster scrolling
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         initializeSongData();
@@ -62,21 +63,21 @@ public class App extends JFrame {
 
     private void initializeSongData() {
         // Initialize all difficulty lists including Re:MASTER
-        String[] difficulties = {"Re:MASTER", "15.0", "14.9", "14.8", "14.7", "14.6", 
+        String[] difficulties = {"15.0", "14.9", "14.8", "14.7", "14.6", 
                                 "14.5", "14.4", "14.3", "14.2", "14.1", "14.0"};
         for (String diff : difficulties) {
             difficultyMap.put(diff, new ArrayList<>());
         }
 
-        // Add songs - note RE-MAS prefix for Re:MASTER songs
-        addSong("Tsunagite", "15.0", "Tsunagite_RE-MAS.png");
+        addSong("Tsunagite (Re:MASTER)", "15.0", "Tsunagite.png");
+        addSong("Tsunagite", "14.8", "Tsunagite.png");
+        addSong("PANDORA PARADOXXX (Re:MASTER)", "15.0", "PANDORA_PARADOXXX.png");
         addSong("REX LUNATiCA", "14.8", "REX_LUNATiCA.png");
         addSong("Vallista", "14.0", "Vallista.png");
         addSong("INFiNiTE ENERZY -Overdose-", "14.0", "INFiNiTE_ENERZY_-Overdoze-.png");
         addSong("Elemental Ethnic", "14.0", "Elemental_Ethnic.png");
         addSong("Trrricksters!!", "14.3", "Trrricksters!!.png");
         addSong("HERA", "14.3", "HERA.png");
-        addSong("QZKago Requiem", "14.2", "QZKago_Requiem.png");
         addSong("Destr0yer", "14.2", "Destr0yer.png");
         addSong("Eta Beta Eta", "14.1", "Eta_beta_eta.png");
         addSong("raputa", "14.9", "raputa.png");
@@ -84,6 +85,11 @@ public class App extends JFrame {
         addSong("Urosousetsu", "14.7", "Urosousetsu.png");
         addSong("GIGANTOMAKHIA", "14.7", "GIGANTOMAKHIA.png");
         addSong("AMAZING MIGHTYYYY!!!!", "14.7", "AMAZING_MIGHTYYYY!!!!.png");
+        addSong("RondeauX of RagnaroQ", "14.5", "RondeauX_of_RagnaroQ.png");
+        addSong("Ai C", "14.0", "Ai_C.png");
+        addSong("Mutation", "14.7", "Mutation.png");
+        addSong("QZKago Requiem", "14.7", "QZKago_Requiem.png");
+        addSong("Luminaria", "14.0", "Luminaria.png");
     }
 
     private JPanel createNavigationBar() {
@@ -187,9 +193,10 @@ public class App extends JFrame {
             setBackground(new Color(60, 65, 80));
             setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(getDifficultyColor(difficulty)),
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                    BorderFactory.createEmptyBorder(5, 5, 5, 5)
             ));
             setPreferredSize(new Dimension(200, 220));
+            setMaximumSize(new Dimension(200, 220));
 
             try {
                 // Build the full image path
@@ -213,12 +220,12 @@ public class App extends JFrame {
 
             JLabel titleLabel = new JLabel(title, SwingConstants.CENTER);
             titleLabel.setForeground(Color.WHITE);
-            titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
             infoPanel.add(titleLabel, BorderLayout.NORTH);
 
             JLabel diffLabel = new JLabel(difficulty, SwingConstants.CENTER);
             diffLabel.setForeground(getDifficultyColor(difficulty));
-            diffLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+            diffLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
             infoPanel.add(diffLabel, BorderLayout.SOUTH);
 
             add(infoPanel, BorderLayout.SOUTH);
