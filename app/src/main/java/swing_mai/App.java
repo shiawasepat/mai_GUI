@@ -54,7 +54,7 @@ public class App extends JFrame {
         
         JScrollPane scrollPane = new JScrollPane(wrapperPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(32);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         initializeSongData();
@@ -62,7 +62,7 @@ public class App extends JFrame {
 
         add(mainPanel);
     }
-    
+
     public class NavButton extends MaiButton {
         public NavButton(String text, Color bgColor) {
             super(text);
