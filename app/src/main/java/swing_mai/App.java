@@ -181,6 +181,7 @@ public class App extends JFrame {
         addSong("PANDORA PARADOXXX", "14.9", "PANDORA_PARADOXXX.png");
         addSong("REX LUNATiCA", "14.8", "REX_LUNATiCA.png");
         addSong("Vallista", "14.0", "Vallista.png");
+        addSong("184億回のマルチトニック", "14.1", "184oku_kai_no_multitonic.png");
         addSong("INFiNiTE ENERZY -Overdose-", "14.0", "INFiNiTE_ENERZY_-Overdoze-.png");
         addSong("Elemental Ethnic", "14.0", "Elemental_Ethnic.png");
         addSong("Trrricksters!!", "14.3", "Trrricksters!!.png");
@@ -211,7 +212,6 @@ public class App extends JFrame {
         addSong("BreaK! BreaK! BreaK!", "14.6", "BreaK!_BreaK!_BreaK!.png");
         addSong("VERTeX (rintaro soma deconstructed remix) ", "14.6", "VERTeX_(rintaro_soma_deconstructed_remix).png");
         addSong("氷滅の135小節", "14.8", "Hyoumetsu_no_135_shousetsu.png");
-        
     }
 
     // Inner class to hold song details
@@ -246,13 +246,15 @@ public class App extends JFrame {
             songDetails.put("RondeauX of RagnaroQ", new Song("Morrigan feat.Lily and 結城碧", "185", "Jack vs サファ太", "692", "40", "51", "4", "62"));
             songDetails.put("BREaK! BREaK! BREaK!", new Song("HiTECH NINJA vs Cranky", "165", "Jサファ太 vs -ZONE- SaFaRi", "797", "76", "121", "62", "50"));
             songDetails.put("VERTeX (rintaro soma deconstructed remix)", new Song("Hiro/rintaro soma", "158", "rinato soma", "659", "32", "89", "85", "71"));
-            songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "Jack vs サファ太", "692", "40", "51", "4", "62"));
+            songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "", "692", "40", "51", "4", "62"));
             songDetails.put("火炎地獄", new Song("山根ミチル", "216", "はっぴ", "356", "17", "72", "309", "70"));
             songDetails.put("sølips", new Song("rintaro soma", "199", "7.3GHz -Før The Legends-", "600", "100", "120", "80", "73"));
+            songDetails.put("184億回のマルチトニック", new Song("Pizuya's Cell feat.中村さん", "184", "Jack", "886", "31", "116", "73", "38"));
             songDetails.put("Latent Kingdom", new Song("t+pazolite", "201", "Safata.GHz", "984", "45", "124", "64", "154"));
             songDetails.put("WE'RE BACK!!", new Song("Zekk", "185", "Luxizhel", "730", "78", "89", "32", "32"));
             songDetails.put("YURUSHITE", new Song("t+pazolite", "270", "小鳥遊さん", "801", "86", "94", "38", "35"));
             songDetails.put("氷滅の135小節", new Song("大国奏音", "205", "BELiZHEL vs 7.3GHz", "802", "33", "130", "25", "135"));
+            songDetails.put("Destr0yer", new Song("削除 feat. Nikki Simmons", "190", "Jack", "744", "53", "84", "-", "16"));
             songDetails.put("GIGANTØMAKHIA", new Song("BlackYooh vs. siromaru", "190", "KOP3rd with 翡翠マナ", "883", "37", "98", "31", "100"));
             songDetails.put("YURUSHITE", new Song("t+pazolite", "270", "小鳥遊さん", "801", "86", "94", "38", "35"));
             songDetails.put("雨露霜雪", new Song("かねこちはる vs t+pazolite", "250", "サファ太 vs Luxizhel", "754", "95", "102", "124", "146"));
