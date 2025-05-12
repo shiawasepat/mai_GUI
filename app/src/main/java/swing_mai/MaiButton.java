@@ -31,7 +31,7 @@ public class MaiButton extends JButton {
                 if (!isSelected) setBackground(getBackground().brighter());
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (!isSelected) setBackground(getBackground());
+                if (!isSelected) setBackground(getBackground().darker());
             }
         });
     }

@@ -138,8 +138,6 @@ public class App extends JFrame {
     private void showAllSongs() {
         contentPanel.removeAll();
         resetButtonColors();
-        JButton allBtn = difficultyButtons.get("MASTER");
-        if (allBtn != null) allBtn.setBackground(new Color(80, 85, 100));
         
         difficultyMap.values().stream()
         .flatMap(List::stream)
