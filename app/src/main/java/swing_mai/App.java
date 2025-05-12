@@ -167,7 +167,7 @@ public class App extends JFrame {
 
     // Initialize song data
     private void initializeSongData() {
-        // Initialize all difficulty lists including Re:MASTER
+        // Initialize all difficulty lists
         String[] difficulties = {"15.0", "14.9", "14.8", "14.7", "14.6", 
                                 "14.5", "14.4", "14.3", "14.2", "14.1", "14.0"};
         for (String diff : difficulties) {

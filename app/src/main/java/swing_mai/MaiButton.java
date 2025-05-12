@@ -31,7 +31,7 @@ public class MaiButton extends JButton {
                 if (!isSelected) setBackground(getBackground().brighter());
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (!isSelected) setBackground(getBackground().darker());
+                if (!isSelected) setBackground(getBackground());
             }
         });
     }
@@ -52,7 +52,7 @@ public class MaiButton extends JButton {
 
         // Draw glow effect if selected
         if (glowIntensity > 0) {
-            Color glowColor = new Color(1f, 1f, 1f, glowIntensity * 0.3f);
+            Color glowColor = new Color(1f, 1f, 1f, glowIntensity * 1f);
             g2d.setColor(glowColor);
             for (int i = 0; i < 5; i++) {
                 g2d.fillRoundRect(i, i, getWidth() - 2*i, getHeight() - 2*i, 10, 10);
