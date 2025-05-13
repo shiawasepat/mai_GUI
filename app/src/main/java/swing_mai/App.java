@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class App extends JFrame {
     
@@ -97,7 +98,6 @@ public class App extends JFrame {
     }
     
     
-
     private JPanel createSidebar() {
         JPanel sidebar = new JPanel();
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
@@ -116,11 +116,11 @@ public class App extends JFrame {
             for (String difficulty : standardDifficulties) {
                 JButton btn = createDifficultyButton(difficulty);
                 btn.addActionListener(e -> showDifficulty(difficulty));
-            difficultyButtons.put(difficulty, btn);
-            sidebar.add(btn);
-        }
+                difficultyButtons.put(difficulty, btn);
+                sidebar.add(btn);
+            }
         
-        return sidebar;
+            return sidebar;
     }
     
     private JButton createDifficultyButton(String text) {
@@ -129,23 +129,34 @@ public class App extends JFrame {
         btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
         btn.setForeground(Color.WHITE);
         btn.setBackground(new Color(60, 65, 80));
-        btn.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 16));
+        btn.setFont(new Font("Arial", Font.BOLD, 16));
         btn.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         btn.setFocusPainted(false);
         return btn;
     }
-
+    
     private void showAllSongs() {
         contentPanel.removeAll();
         resetButtonColors();
         
-        difficultyMap.values().stream()
-        .flatMap(List::stream)
-        .forEach(contentPanel::add);
+        // Get all songs and sort them by difficulty in descending order
+        List<SongCard> allSongs = difficultyMap.values().stream()
+            .flatMap(List::stream)
+            .sorted((a, b) -> {
+                // Extract difficulty values for comparison
+                double diffA = Double.parseDouble(((JLabel)((JPanel)a.getComponent(1)).getComponent(1)).getText());
+                double diffB = Double.parseDouble(((JLabel)((JPanel)b.getComponent(1)).getComponent(1)).getText());
+                // Sort in descending order
+                return Double.compare(diffB, diffA);
+            })
+            .collect(Collectors.toList());
+        
+        allSongs.forEach(contentPanel::add);
         
         contentPanel.revalidate();
         contentPanel.repaint();
     }
+
     
     private void showDifficulty(String difficulty) {
         contentPanel.removeAll();
@@ -180,6 +191,8 @@ public class App extends JFrame {
         addSong("REX LUNATiCA", "14.8", "REX_LUNATiCA.png");
         addSong("Vallista", "14.0", "Vallista.png");
         addSong("184億回のマルチトニック", "14.1", "184oku_kai_no_multitonic.png");
+        addSong("Schwarzschild", "14.3", "Schwarzschild.png");
+        addSong("Schwarzschild (Re:MASTER)", "14.9", "Schwarzschild.png");
         addSong("INFiNiTE ENERZY -Overdose-", "14.0", "INFiNiTE_ENERZY_-Overdoze-.png");
         addSong("Elemental Ethnic", "14.0", "Elemental_Ethnic.png");
         addSong("Trrricksters!!", "14.3", "Trrricksters!!.png");
@@ -187,13 +200,17 @@ public class App extends JFrame {
         addSong("Alea jacta est! (Re:MASTER)", "14.8", "Alea_jacta_est!.png");
         addSong("HERA", "14.3", "HERA.png");
         addSong("Destr0yer", "14.2", "Destr0yer.png");
+        addSong("Divide et impera!", "14.8", "Divide_et_impera!.png");
         addSong("エータ・ベータ・イータ", "14.1", "Eta_beta_eta.png");
         addSong("raputa", "14.9", "raputa.png");
+        addSong("Garakuta Doll Play!", "14.2", "Garakuta_Doll_Play.png");
+        addSong("Garakuta Doll Play! (Re:MASTER)", "14.8", "Garakuta_Doll_Play.png");
         addSong("Latent Kingdom", "14.9", "Latent_Kingdom.png");
         addSong("雨露霜雪", "14.7", "Urosousetsu.png");
         addSong("宙天", "14.9", "Chuuten.png");
         addSong("GIGANTØMAKHIA", "14.7", "GIGANTOMAKHIA.png");
         addSong("AMAZING MIGHTYYYY!!!!", "14.7", "AMAZING_MIGHTYYYY!!!!.png");
+        addSong("AMAZING MIGHTYYYY!!!! (Re:MASTER)", "14.5", "AMAZING_MIGHTYYYY!!!!.png");
         addSong("RondeauX of RagnaroQ", "14.5", "RondeauX_of_RagnaroQ.png");
         addSong("Ai C", "14.0", "Ai_C.png");
         addSong("WE'RE BACK!!", "14.0", "WE'RE_BACK!!.png");
@@ -201,6 +218,7 @@ public class App extends JFrame {
         addSong("Horoscope Express", "14.0", "Horoscope_Express.png");
         addSong("QZKago Requiem", "14.7", "QZKago_Requiem.png");
         addSong("QZKago Requiem (Re:MASTER)", "14.9", "QZKago_Requiem.png");
+        addSong("taboo tears you up", "14.0", "taboo_tears_you_up.png");
         addSong("Luminaria", "14.0", "Luminaria.png");
         addSong("Starry Colors", "14.0", "Starry_Colors.png");
         addSong("火炎地獄", "14.1", "Kaen_jigoku.png");
@@ -210,13 +228,14 @@ public class App extends JFrame {
         addSong("BreaK! BreaK! BreaK!", "14.6", "BreaK!_BreaK!_BreaK!.png");
         addSong("VERTeX (rintaro soma deconstructed remix) ", "14.6", "VERTeX_(rintaro_soma_deconstructed_remix).png");
         addSong("氷滅の135小節", "14.8", "Hyoumetsu_no_135_shousetsu.png");
+        addSong("封焔の135秒", "14.8", "Fuuen_no_135_byou.png");
     }
 
     // Inner class to hold song details
     private static class Song {
-        String artist, bpm, designer, tap, hold, slide, touch, breaks;
+        String artist, bpm, designer, tap, hold, slide, touch, breaks, imageFile;
         
-        Song(String artist, String bpm, String designer, String tap, String hold, String slide, String touch, String breaks) {
+        Song(String artist, String bpm, String designer, String tap, String hold, String slide, String touch, String breaks, String imageFile) {
             this.artist = artist;
             this.bpm = bpm;
             this.designer = designer;
@@ -225,71 +244,95 @@ public class App extends JFrame {
             this.slide = slide;
             this.touch = touch;
             this.breaks = breaks;
+            this.imageFile = imageFile;
         }
     }
     
         private void showSongDetails(String title) {
             Map<String, Song> songDetails = new HashMap<>();
-            songDetails.put("系ぎて (Re:MASTER)", new Song("rintaro soma", "88", "BEYOND THE MEMORIES", "1100", "40", "70", "90", "100"));
-            songDetails.put("系ぎて", new Song("rintaro soma", "88", "maimai TEAM DX", "862", "59", "73", "118", "88"));
-            songDetails.put("PANDORA PARADOXXX (Re:MASTER)", new Song("Sakuzyo", "150", "PANDORA PARADOXXX", "1165", "72", "90", "-", "15"));
-            songDetails.put("PANDORA PARADOXXX", new Song("Sakuzyo", "150", "PANDORA BOXXX", "1017", "98", "117", "-", "77"));
-            songDetails.put("REX LUNATiCA", new Song("Kai", "230", "BELiZHEL", "826", "49", "123", "29", "76"));
-            songDetails.put("Vallista", new Song("Sakuzyo", "180", "Luxizhel", "607", "25", "41", "53", "39"));
-            songDetails.put("Starry Colors", new Song("BlackY feat.Risa Yuzuki", "177", "ロシェ@ペンギン", "674", "60", "99", "78", "19"));
-            songDetails.put("INFiNiTE ENERZY -Overdose-", new Song("Reku Mochizuki", "180", "Jack vs サファ太", "692", "40", "51", "4", "62"));
-            songDetails.put("Alea jacta est!", new Song("BlackY fused with WAiKURO", "162", "Carpe diem＊ HAN∀BI", "793", "51", "82", "-", "84"));
-            songDetails.put("Alea jacta est! (Re:MASTER)", new Song("BlackY fused with WAiKURO", "162", "小鳥遊さん fused with Phoenix", "906", "83", "77", "-", "71"));
-            songDetails.put("raputa", new Song("TJ.hangneil", "339", "project_raputa", "992", "116", "102", "29", "77"));
-            songDetails.put("RondeauX of RagnaroQ", new Song("Morrigan feat.Lily and 結城碧", "185", "Jack vs サファ太", "692", "40", "51", "4", "62"));
-            songDetails.put("BREaK! BREaK! BREaK!", new Song("HiTECH NINJA vs Cranky", "165", "Jサファ太 vs -ZONE- SaFaRi", "797", "76", "121", "62", "50"));
-            songDetails.put("VERTeX (rintaro soma deconstructed remix)", new Song("Hiro/rintaro soma", "158", "rinato soma", "659", "32", "89", "85", "71"));
-            songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "チャン@DP皆伝", "692", "40", "51", "4", "62"));
-            songDetails.put("火炎地獄", new Song("山根ミチル", "216", "はっぴ", "356", "17", "72", "309", "70"));
-            songDetails.put("sølips", new Song("rintaro soma", "199", "7.3GHz -Før The Legends-", "600", "100", "120", "80", "73"));
-            songDetails.put("184億回のマルチトニック", new Song("Pizuya's Cell feat.中村さん", "184", "Jack", "886", "31", "116", "73", "38"));
-            songDetails.put("Latent Kingdom", new Song("t+pazolite", "201", "Safata.GHz", "984", "45", "124", "64", "154"));
-            songDetails.put("WE'RE BACK!!", new Song("Zekk", "185", "Luxizhel", "730", "78", "89", "32", "32"));
-            songDetails.put("YURUSHITE", new Song("t+pazolite", "270", "小鳥遊さん", "801", "86", "94", "38", "35"));
-            songDetails.put("氷滅の135小節", new Song("大国奏音", "205", "BELiZHEL vs 7.3GHz", "802", "33", "130", "25", "135"));
-            songDetails.put("Destr0yer", new Song("削除 feat. Nikki Simmons", "190", "Jack", "744", "53", "84", "-", "16"));
-            songDetails.put("GIGANTØMAKHIA", new Song("BlackYooh vs. siromaru", "190", "KOP3rd with 翡翠マナ", "883", "37", "98", "31", "100"));
-            songDetails.put("YURUSHITE", new Song("t+pazolite", "270", "小鳥遊さん", "801", "86", "94", "38", "35"));
-            songDetails.put("雨露霜雪", new Song("かねこちはる vs t+pazolite", "250", "サファ太 vs Luxizhel", "754", "95", "102", "124", "146"));
-            songDetails.put("宙天", new Song("t+pazolite vs かねこちはる", "125", "BELiZHEL vs Safari", "725", "55", "89", "107", "82"));
-    
-            Song song = songDetails.getOrDefault(title, new Song("Unknown Artist", "999", "Unknown Designer", "999", "999", "999", "999", "999"));
-    
+            songDetails.put("系ぎて (Re:MASTER)", new Song("rintaro soma", "88", "BEYOND THE MEMORIES", "1100", "40", "70", "90", "100", "Tsunagite.png"));
+            songDetails.put("系ぎて", new Song("rintaro soma", "88", "maimai TEAM DX", "862", "59", "73", "118", "88", "Tsunagite.png"));
+            songDetails.put("PANDORA PARADOXXX (Re:MASTER)", new Song("Sakuzyo", "150", "PANDORA PARADOXXX", "1165", "72", "90", "-", "15", "PANDORA_PARADOXXX.png"));
+            songDetails.put("PANDORA PARADOXXX", new Song("Sakuzyo", "150", "PANDORA BOXXX", "1017", "98", "117", "-", "77", "PANDORA_PARADOXXX.png"));
+            songDetails.put("REX LUNATiCA", new Song("Kai", "230", "BELiZHEL", "826", "49", "123", "29", "76", "REX_LUNATiCA.png"));
+            songDetails.put("Mutation", new Song("Laur", "230", "BELiZHEL", "826", "49", "123", "29", "76", "REX_LUNATiCA.png"));
+            songDetails.put("Vallista", new Song("Sakuzyo", "180", "Luxizhel", "607", "25", "41", "53", "39", "Vallista.png"));
+            songDetails.put("Starry Colors", new Song("BlackY feat.Risa Yuzuki", "177", "ロシェ@ペンギン", "674", "60", "99", "78", "19", "Starry_Colors.png"));
+            songDetails.put("AMAZING MIGHTYY!!!", new Song("WAiKURO", "185", "ぴちネコ vs Jack", "865", "69", "151", "-", "41", "AMAZING_MIGHTYYYY!!!!.png"));
+            songDetails.put("AMAZING MIGHTYY!!! (Re:MASTER)", new Song("WAiKURO", "185", "はっぴ", "874", "65", "162", "-", "38", "AMAZING_MIGHTYYYY!!!!.png"));
+            songDetails.put("INFiNiTE ENERZY -Overdose-", new Song("Reku Mochizuki", "180", "Jack vs サファ太", "692", "40", "51", "4", "62", "INFiNiTE_ENERZY_-Overdose-.png"));
+            songDetails.put("Alea jacta est!", new Song("BlackY fused with WAiKURO", "162", "Carpe diem＊ HAN∀BI", "793", "51", "82", "-", "84", "Alea_jacta_est!.png"));
+            songDetails.put("Alea jacta est! (Re:MASTER)", new Song("BlackY fused with WAiKURO", "162", "小鳥遊さん fused with Phoenix", "906", "83", "77", "-", "71", "Alea_jacta_est!.png"));
+            songDetails.put("HERA", new Song("ルゼ", "186", "Jack vs サファ太", "692", "40", "51", "-", "62", "HERA.png"));
+            songDetails.put("raputa", new Song("TJ.hangneil", "339", "project_raputa", "992", "116", "102", "29", "77", "raputa.png"));
+            songDetails.put("RondeauX of RagnaroQ", new Song("Morrigan feat.Lily and 結城碧", "185", "R-blacX of JacQ", "692", "40", "51", "4", "62", "RondeauX_of_RagnaroQ.png"));
+            songDetails.put("BREaK! BREaK! BREaK!", new Song("HiTECH NINJA vs Cranky", "165", "サファ太 vs -ZONE- SaFaRi", "797", "76", "121", "62", "50", "BREaK!_BREaK!_BREaK!"));
+            songDetails.put("Schwarzschild", new Song("Tsukasa", "188", "”H” ack", "819", "28", "49", "-", "2", "Schwarzschild.png"));
+            songDetails.put("Schwarzschild (Re:MASTER)", new Song("Tsukasa", "188", "”H” ack underground", "806", "22", "45", "-", "2", "Schwarzschild.png"));
+            songDetails.put("VERTeX (rintaro soma deconstructed remix)", new Song("Hiro/rintaro soma", "158", "rinato soma", "659", "32", "89", "85", "71", "VERTeX_(rintaro_soma_deconstructed_remix).png"));
+            songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "チャン@DP皆伝", "857", "29", "29", "66", "73", "Eta_beta_eta.png"));
+            songDetails.put("火炎地獄", new Song("山根ミチル", "216", "はっぴ", "356", "17", "72", "309", "70", "Kaen_jigoku.png"));
+            songDetails.put("sølips", new Song("rintaro soma", "199", "7.3GHz -Før The Legends-", "600", "100", "120", "80", "73", "solips.png"));
+            songDetails.put("QZKago Requiem", new Song("t+pazolite", "257", "チャン＠DP皆伝", "838", "12", "191", "-", "64", "QZKago_Requiem.png"));
+            songDetails.put("QZKago Requiem (Re:MASTER)", new Song("t+pazolite", "257", "Garakuta Scramble!", "861", "19", "211", "-", "90", "QZKago_Requiem.png"));
+            songDetails.put("Divide et impera!", new Song("BlackY a.k.a. WAiKURO survive", "166", "The Dove", "859", "102", "95", "69", "100", "Divide_et_impera!.png"));
+            songDetails.put("184億回のマルチトニック", new Song("Pizuya's Cell feat.中村さん", "184", "Jack", "886", "31", "116", "73", "38", "184oku_kai_no_multitonic.png"));
+            songDetails.put("Latent Kingdom", new Song("t+pazolite", "201", "Safata.GHz", "984", "45", "124", "64", "154", "Latent_Kingdom.png"));
+            songDetails.put("taboo tears you up", new Song("REDALiCE (HARDCORE TANO*C)", "180", "サファ太", "651", "106", "95", "52", "33", "taboo_tears_you_up.png"));
+            songDetails.put("WE'RE BACK!!", new Song("Zekk", "185", "Luxizhel", "730", "78", "89", "32", "32", "WE'RE_BACK!!.png"));
+            songDetails.put("YURUSHITE", new Song("t+pazolite", "270", "小鳥遊さん", "801", "86", "94", "38", "35", "YURUSHITE.png"));
+            songDetails.put("氷滅の135小節", new Song("大国奏音", "205", "BELiZHEL vs 7.3GHz", "802", "33", "130", "25", "135", "Hyoumetsu_no_135_shousetsu.png"));
+            songDetails.put("封焔の135秒", new Song("大国奏音", "205", "7.3GHz vs Phoenix", "786", "57", "81", "33", "135", "Fuuen_no_135_byou.png"));
+            songDetails.put("Destr0yer", new Song("削除 feat. Nikki Simmons", "190", "Jack", "744", "53", "84", "-", "16", "Destr0yer.png"));
+            songDetails.put("GIGANTØMAKHIA", new Song("BlackYooh vs. siromaru", "190", "KOP3rd with 翡翠マナ", "883", "37", "98", "31", "100", "GIGANTOMAKHIA.png"));
+            songDetails.put("雨露霜雪", new Song("かねこちはる vs t+pazolite", "250", "サファ太 vs Luxizhel", "754", "95", "102", "124", "146", "Urosousetsu.png"));
+            songDetails.put("宙天", new Song("t+pazolite vs かねこちはる", "125", "BELiZHEL vs Safari", "725", "55", "89", "107", "82", "Chuuten.png"));
+
+            Song song = songDetails.getOrDefault(title, new Song("Unknown Artist", "999", "Unknown Designer", "999", "999", "999", "999", "999", "dummy.png"));
+
             JDialog detailsDialog = new JDialog(this, title, true);
-            detailsDialog.setSize(400, 300);
+            detailsDialog.setSize(500, 500);
             detailsDialog.setLocationRelativeTo(this);
-    
+
             JPanel detailsPanel = new JPanel();
             detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
             detailsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             detailsPanel.setBackground(new Color(40, 45, 60));
-    
+
+            // Add image
+            try {
+            String imageFile = IMAGE_DIR + song.imageFile;
+            Image img = ImageIO.read(new File(imageFile))
+                .getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            JLabel imageLabel = new JLabel(new ImageIcon(img));
+            imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            detailsPanel.add(imageLabel);
+            detailsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+            } catch (IOException e) {
+            System.err.println("Could not load image for: " + title);
+            }
+
             String songInfo = String.format("""
-                Title: %s
-                Artist: %s
-                BPM: %s
-                
-                Designer: %s
-                Notes:
-                TAP: %s
-                HOLD: %s
-                SLIDE: %s
-                TOUCH: %s
-                BREAK: %s
-                """, title, song.artist, song.bpm, song.designer, song.tap, song.hold, song.slide, song.touch, song.breaks);
-    
+            Title: %s
+            Artist: %s
+            BPM: %s
+            
+            Designer: %s
+            Notes:
+            TAP: %s
+            HOLD: %s
+            SLIDE: %s
+            TOUCH: %s
+            BREAK: %s
+            """, title, song.artist, song.bpm, song.designer, song.tap, song.hold, song.slide, song.touch, song.breaks);
+
             JTextArea textArea = new JTextArea(songInfo);
             textArea.setEditable(false);
             textArea.setBackground(new Color(40, 45, 60));
             textArea.setForeground(Color.WHITE);
-            textArea.setFont(new Font("MS Gothic", Font.PLAIN, 14));
+            textArea.setFont(new Font("Meiryo", Font.PLAIN, 14));
             detailsPanel.add(textArea);
-    
+
             detailsDialog.add(detailsPanel);
             detailsDialog.setVisible(true);
         }
@@ -302,7 +345,7 @@ public class App extends JFrame {
             setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
             setForeground(Color.WHITE);
             setBackground(new Color(60, 65, 80));
-            setFont(new Font("Segoe UI", Font.BOLD, 16));
+            setFont(new Font("Meiryo", Font.BOLD, 16));
             setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
             setFocusPainted(false);
         }
@@ -340,7 +383,7 @@ public class App extends JFrame {
                 System.err.println("Failed to load image: " + imageFile);
                 JLabel placeholder = new JLabel(title, SwingConstants.CENTER); // Show title if image missing
                 placeholder.setForeground(Color.WHITE);
-                placeholder.setFont(new Font("Segoe UI", Font.BOLD, 14));
+                placeholder.setFont(new Font("Meiryo", Font.BOLD, 14));
                 add(placeholder, BorderLayout.CENTER);
             }
 
@@ -350,12 +393,12 @@ public class App extends JFrame {
 
             JLabel titleLabel = new JLabel(title, SwingConstants.CENTER);
             titleLabel.setForeground(Color.WHITE);
-            titleLabel.setFont(new Font("MS Gothic", Font.BOLD, 12));
+            titleLabel.setFont(new Font("Meiryo", Font.BOLD, 12));
             infoPanel.add(titleLabel, BorderLayout.NORTH);
 
             JLabel diffLabel = new JLabel(difficulty, SwingConstants.CENTER);
             diffLabel.setForeground(getDifficultyColor(difficulty));
-            diffLabel.setFont(new Font("MS Gothic", Font.BOLD, 14));
+            diffLabel.setFont(new Font("Meiryo", Font.BOLD, 14));
             infoPanel.add(diffLabel, BorderLayout.SOUTH);
 
             // Add mouse listener for click events
