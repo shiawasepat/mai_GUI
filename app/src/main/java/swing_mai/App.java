@@ -244,7 +244,7 @@ public class App extends JFrame {
             songDetails.put("RondeauX of RagnaroQ", new Song("Morrigan feat.Lily and 結城碧", "185", "Jack vs サファ太", "692", "40", "51", "4", "62"));
             songDetails.put("BREaK! BREaK! BREaK!", new Song("HiTECH NINJA vs Cranky", "165", "Jサファ太 vs -ZONE- SaFaRi", "797", "76", "121", "62", "50"));
             songDetails.put("VERTeX (rintaro soma deconstructed remix)", new Song("Hiro/rintaro soma", "158", "rinato soma", "659", "32", "89", "85", "71"));
-            songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "", "692", "40", "51", "4", "62"));
+            songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "チャン@DP皆伝", "692", "40", "51", "4", "62"));
             songDetails.put("火炎地獄", new Song("山根ミチル", "216", "はっぴ", "356", "17", "72", "309", "70"));
             songDetails.put("sølips", new Song("rintaro soma", "199", "7.3GHz -Før The Legends-", "600", "100", "120", "80", "73"));
             songDetails.put("184億回のマルチトニック", new Song("Pizuya's Cell feat.中村さん", "184", "Jack", "886", "31", "116", "73", "38"));
@@ -287,7 +287,7 @@ public class App extends JFrame {
             textArea.setEditable(false);
             textArea.setBackground(new Color(40, 45, 60));
             textArea.setForeground(Color.WHITE);
-            textArea.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+            textArea.setFont(new Font("MS Gothic", Font.PLAIN, 14));
             detailsPanel.add(textArea);
     
             detailsDialog.add(detailsPanel);
@@ -350,12 +350,12 @@ public class App extends JFrame {
 
             JLabel titleLabel = new JLabel(title, SwingConstants.CENTER);
             titleLabel.setForeground(Color.WHITE);
-            titleLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+            titleLabel.setFont(new Font("MS Gothic", Font.BOLD, 12));
             infoPanel.add(titleLabel, BorderLayout.NORTH);
 
             JLabel diffLabel = new JLabel(difficulty, SwingConstants.CENTER);
             diffLabel.setForeground(getDifficultyColor(difficulty));
-            diffLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            diffLabel.setFont(new Font("MS Gothic", Font.BOLD, 14));
             infoPanel.add(diffLabel, BorderLayout.SOUTH);
 
             // Add mouse listener for click events
