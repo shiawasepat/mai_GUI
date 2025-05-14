@@ -1,8 +1,14 @@
 package swing_mai;
 
-import javax.swing.*;
-import java.awt.*;
-import javax.imageio.ImageIO;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +17,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class App extends JFrame {
     
@@ -215,7 +237,7 @@ public class App extends JFrame {
         addSong("Ai C", "14.0", "Ai_C.png");
         addSong("WE'RE BACK!!", "14.0", "WE'RE_BACK!!.png");
         addSong("勦滅", "14.2", "Soumetsu.png");
-        addSong("Mutation", "14.7", "Mutation.png");
+        addSong("Mutation", "14.0", "Mutation.png");
         addSong("Horoscope Express", "14.0", "Horoscope_Express.png");
         addSong("QZKago Requiem", "14.7", "QZKago_Requiem.png");
         addSong("QZKago Requiem (Re:MASTER)", "14.9", "QZKago_Requiem.png");
@@ -225,8 +247,8 @@ public class App extends JFrame {
         addSong("火炎地獄", "14.1", "Kaen_jigoku.png");
         addSong("Trick tear", "14.4", "Trick_tear.png");
         addSong("CO5M1C R4ILR0AD", "14.4", "CO5M1C_R4ILR0AD.png");
-        addSong("ほしぞらスペクタルク", "14.4", "Hoshizora_spectacle.png");
-        addSong("BreaK! BreaK! BreaK!", "14.6", "BreaK!_BreaK!_BreaK!.png");
+        addSong("ほしぞらスペクタクル", "14.4", "Hoshizora_spectacle.png");
+        addSong("BREaK! BREaK! BREaK!", "14.6", "BREaK!_BREaK!_BREaK!.png");
         addSong("VERTeX (rintaro soma deconstructed remix) ", "14.6", "VERTeX_(rintaro_soma_deconstructed_remix).png");
         addSong("氷滅の135小節", "14.8", "Hyoumetsu_no_135_shousetsu.png");
         addSong("封焔の135秒", "14.8", "Fuuen_no_135_byou.png");
@@ -255,8 +277,8 @@ public class App extends JFrame {
             songDetails.put("系ぎて", new Song("rintaro soma", "88", "maimai TEAM DX", "862", "59", "73", "118", "88", "Tsunagite.png"));
             songDetails.put("PANDORA PARADOXXX (Re:MASTER)", new Song("Sakuzyo", "150", "PANDORA PARADOXXX", "1165", "72", "90", "-", "15", "PANDORA_PARADOXXX.png"));
             songDetails.put("PANDORA PARADOXXX", new Song("Sakuzyo", "150", "PANDORA BOXXX", "1017", "98", "117", "-", "77", "PANDORA_PARADOXXX.png"));
-            songDetails.put("AMAZING MIGHTYY!!!", new Song("WAiKURO", "185", "ぴちネコ vs Jack", "865", "69", "151", "-", "41", "AMAZING_MIGHTYYYY!!!!.png"));
-            songDetails.put("AMAZING MIGHTYY!!! (Re:MASTER)", new Song("WAiKURO", "185", "はっぴ", "874", "65", "162", "-", "38", "AMAZING_MIGHTYYYY!!!!.png"));
+            songDetails.put("AMAZING MIGHTYYYY!!!!", new Song("WAiKURO", "185", "ぴちネコ vs Jack", "865", "69", "151", "-", "41", "AMAZING_MIGHTYYYY!!!!.png"));
+            songDetails.put("AMAZING MIGHTYYYY!!!! (Re:MASTER)", new Song("WAiKURO", "185", "はっぴ", "874", "65", "162", "-", "38", "AMAZING_MIGHTYYYY!!!!.png"));
             songDetails.put("QZKago Requiem", new Song("t+pazolite", "257", "チャン＠DP皆伝", "838", "12", "191", "-", "64", "QZKago_Requiem.png"));
             songDetails.put("QZKago Requiem (Re:MASTER)", new Song("t+pazolite", "257", "Garakuta Scramble!", "861", "19", "211", "-", "90", "QZKago_Requiem.png"));
             songDetails.put("INFiNiTE ENERZY -Overdose-", new Song("Reku Mochizuki", "180", "Jack vs サファ太", "692", "40", "51", "4", "62", "INFiNiTE_ENERZY_-Overdoze-.png"));
@@ -266,16 +288,18 @@ public class App extends JFrame {
             songDetails.put("Schwarzschild (Re:MASTER)", new Song("Tsukasa", "188", "”H” ack underground", "806", "22", "45", "-", "2", "Schwarzschild.png"));
             songDetails.put("Garakuta Doll Play!", new Song("t+pazolite", "256", "チャン@DP皆伝", "718", "6", "134", "-", "19", "Garakuta_Doll_Play.png"));
             songDetails.put("Garakuta Doll Play! (Re:MASTER)", new Song("t+pazolite", "256", "チャン@DP皆伝", "718", "6", "134", "-", "19", "Garakuta_Doll_Play.png"));
-            songDetails.put("HERA", new Song("ルゼ", "186", "Jack vs サファ太", "692", "40", "51", "-", "62", "HERA.png"));
+            songDetails.put("HERA", new Song("ルゼ", "186", "Revo@LC", "692", "40", "51", "-", "62", "HERA.png"));
             songDetails.put("raputa", new Song("TJ.hangneil", "339", "project_raputa", "992", "116", "102", "29", "77", "raputa.png"));
             songDetails.put("RondeauX of RagnaroQ", new Song("Morrigan feat.Lily and 結城碧", "185", "R-blacX of JacQ", "692", "40", "51", "4", "62", "RondeauX_of_RagnaroQ.png"));
-            songDetails.put("BREaK! BREaK! BREaK!", new Song("HiTECH NINJA vs Cranky", "165", "サファ太 vs -ZONE- SaFaRi", "797", "76", "121", "62", "50", "BREaK!_BREaK!_BREaK!"));
+            songDetails.put("BREaK! BREaK! BREaK!", new Song("HiTECH NINJA vs Cranky", "165", "サファ太 vs -ZONE- SaFaRi", "797", "76", "121", "62", "50", "BREaK!_BREaK!_BREaK!.png"));
             songDetails.put("Starry Colors", new Song("BlackY feat.Risa Yuzuki", "177", "ロシェ@ペンギン", "674", "60", "99", "78", "19", "Starry_Colors.png"));
-            songDetails.put("VERTeX (rintaro soma deconstructed remix)", new Song("Hiro/rintaro soma", "158", "rinato soma", "659", "32", "89", "85", "71", "VERTeX_(rintaro_soma_deconstructed_remix).png"));
+            songDetails.put("VERTeX (rintaro soma deconstructed remix)", new Song("Hiro/rintaro soma", "158", "rintaro soma", "659", "32", "89", "85", "71", "VERTeX_(rintaro_soma_deconstructed_remix).png"));
             songDetails.put("REX LUNATiCA", new Song("Kai", "230", "BELiZHEL", "826", "49", "123", "29", "76", "REX_LUNATiCA.png"));
-            songDetails.put("Mutation", new Song("Laur", "230", "BELiZHEL", "826", "49", "123", "29", "76", "REX_LUNATiCA.png"));
+            songDetails.put("Mutation", new Song("Laur", "230", "小鳥遊さん", "713", "130", "47", "81", "20", "Mutation.png"));
+            songDetails.put("Trick tear", new Song("しーけー", "222", "翠楼屋", "518", "75", "116", "90", "41", "Trick_tear.png"));
             songDetails.put("Vallista", new Song("Sakuzyo", "180", "Luxizhel", "607", "25", "41", "53", "39", "Vallista.png"));
             songDetails.put("Elemental Ethnic", new Song("Yooh", "163", "サファ太 & 鳩ホルダー", "836", "64", "89", "23", "70", "Elemental_Ethnic.png"));
+            songDetails.put("ほししぞらスペクタクル", new Song("奏音", "200", "シチミヘルツ", "823", "60", "69", "202", "25", "Hoshizora_spectacle.png"));
             songDetails.put("エータ・ベータ・イータ", new Song("ルゼ", "180", "チャン@DP皆伝", "857", "29", "29", "66", "73", "Eta_beta_eta.png"));
             songDetails.put("勦滅", new Song("siqlo", "200", "ロシェ@ペンギン", "773", "73", "59", "77", "48", "Soumetsu.png"));
             songDetails.put("火炎地獄", new Song("山根ミチル", "216", "はっぴ", "356", "17", "72", "309", "70", "Kaen_jigoku.png"));
@@ -288,7 +312,7 @@ public class App extends JFrame {
             songDetails.put("WE'RE BACK!!", new Song("Zekk", "185", "Luxizhel", "730", "78", "89", "32", "32", "WE'RE_BACK!!.png"));
             songDetails.put("YURUSHITE", new Song("t+pazolite", "270", "小鳥遊さん", "801", "86", "94", "38", "35", "YURUSHITE.png"));
             songDetails.put("氷滅の135小節", new Song("大国奏音", "205", "BELiZHEL vs 7.3GHz", "802", "33", "130", "25", "135", "Hyoumetsu_no_135_shousetsu.png"));
-            songDetails.put("封焔の135秒", new Song("大国奏音", "205", "7.3GHz vs Phoenix", "786", "57", "81", "33", "135", "Fuuen_no_135_byou.png"));
+            songDetails.put("封焔の135秒", new Song("大国奏音", "200", "7.3GHz vs Phoenix", "786", "57", "81", "33", "135", "Fuuen_no_135_byou.png"));
             songDetails.put("Destr0yer", new Song("削除 feat. Nikki Simmons", "190", "Jack", "744", "53", "84", "-", "16", "Destr0yer.png"));
             songDetails.put("GIGANTØMAKHIA", new Song("BlackYooh vs. siromaru", "190", "KOP3rd with 翡翠マナ", "883", "37", "98", "31", "100", "GIGANTOMAKHIA.png"));
             songDetails.put("雨露霜雪", new Song("かねこちはる vs t+pazolite", "250", "サファ太 vs Luxizhel", "754", "95", "102", "124", "146", "Urosousetsu.png"));
